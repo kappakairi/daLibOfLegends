@@ -46,17 +46,28 @@ namespace LibOfLegends
             Call(serviceName, "retrieveInProgressSpectatorGameInfo", responder, arguments);
         }
 
-        void RetrieveInProgressGameInfoInternal(Responder<PlatformGameLifecycleDTO> responder, object[] arguments)
-        {
-            Call(serviceName, "retrieveInProgressGameInfo", responder, arguments);
-        }
-
         /** Creates a custom practice game based on the 
          * PracticeGameConfig class passed to it
          */
         void CreatePracticeGame(Responder<GameDTO> responder, object[] arguments)
         {
             Call(serviceName, "createPracticeGame", responder, arguments);
+        }
+
+        /** Switches the player to observer
+         * if not allowed, will return false
+         */
+        void SwicthPlayerToObserver(Responder<bool> responder, object[] arguments)
+        {
+            Call(serviceName, "switchPlayerToObserver", responder, arguments);
+        }
+
+        /** Switches the observer to player
+         * if not allowed, will return false
+         */
+        void SwicthObserverToPlayer(Responder<bool> responder, object[] arguments)
+        {
+            Call(serviceName, "switchObserverToPlayer", responder, arguments);
         }
 
         /** Quit the current game Lobby that
@@ -104,7 +115,7 @@ namespace LibOfLegends
             return (new InternalCallContext<GameDTO>(GetGameStateInternal, new object[] { gameID, gameState, rand })).Execute();
         }
 
-        public GameDTO getCustomGame(int gameID)
+        public GameDTO getCustomGame(long gameID)
         {
             return (new InternalCallContext<GameDTO>(GetCustomGameInternal, new object[] { gameID })).Execute();
         }
@@ -114,14 +125,19 @@ namespace LibOfLegends
             return (new InternalCallContext<PlatformGameLifecycleDTO>(RetrieveInProgressSpectatorGameInfoInternal, new object[] { summonerName })).Execute();
         }
 
-        public PlatformGameLifecycleDTO retrieveInProgressGameInfo()
-        {
-            return (new InternalCallContext<PlatformGameLifecycleDTO>(RetrieveInProgressGameInfoInternal, new object[] { })).Execute();
-        }
-
         public GameDTO createPracticeGame(PracticeGameConfig gameCfg)
         {
             return (new InternalCallContext<GameDTO>(CreatePracticeGame, new object[] { gameCfg })).Execute();
+        }
+
+        public bool switchPlayerToObserver(long gameID)
+        {
+            return (new InternalCallContext<bool>(SwicthPlayerToObserver, new object[] { gameID })).Execute();
+        }
+
+        public bool switchObserverToPlayer(long gameID, int teamID)
+        {
+            return (new InternalCallContext<bool>(SwicthObserverToPlayer, new object[] { gameID, teamID })).Execute();
         }
 
         public bool quitGame()
