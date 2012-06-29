@@ -9,10 +9,10 @@ using FluorineFx.Net;
 
 using com.riotgames.platform.clientfacade.domain;
 using com.riotgames.platform.gameclient.domain;
+using com.riotgames.platform.game;
 using com.riotgames.platform.login;
 using com.riotgames.platform.statistics;
 using com.riotgames.platform.summoner;
-using com.riotgames.platform.game;
 using com.riotgames.team.dto;
 
 namespace LibOfLegends
@@ -33,26 +33,33 @@ namespace LibOfLegends
 
 		#region Server constants
 
-		const string EndpointString = "my-rtmps";
+		public const string EndpointString = "my-rtmps";
 
 		const string SummonerService = "summonerService";
 		const string PlayerStatsService = "playerStatsService";
+        const string GameStatsService = "gameStatsService";
 		const string ClientFacadeService = "clientFacadeService";
 		const string SummonerTeamService = "summonerTeamService";
-        const string GameService = "gameService";
 
-		#endregion
+        #endregion
 
-		#region Configuration variables
+        #region Service Declarations
 
-		ConnectionProfile ConnectionData;
+        public GameService game;
+        public MatchmakerService matchmaker;
+
+        #endregion
+
+        #region Configuration variables
+
+        ConnectionProfile ConnectionData;
 
 		#endregion
 
 		#region Runtime variables
 
 		public NetConnection NetConnection { get { return RPCNetConnection; } set { RPCNetConnection = value; } }
-		NetConnection RPCNetConnection;
+		public NetConnection RPCNetConnection;
 
 		AuthResponse AuthResponse;
 
@@ -64,6 +71,10 @@ namespace LibOfLegends
 			ConnectCallback = connectCallback;
 			DisconnectCallback = disconnectCallback;
 			NetStatusCallback = netStatusCallback;
+
+            /** Create service objects to call RPC functions */
+            game = new GameService(this);
+            matchmaker = new MatchmakerService(this);
 		}
 
 		public void Connect()
@@ -85,6 +96,7 @@ namespace LibOfLegends
 				AuthService authService = new AuthService(ConnectionData.Region.LoginQueueURL, ConnectionData.Proxy.LoginQueueProxy);
 				// Get an Auth token (Dumb, assumes no queueing, blocks)
 				AuthResponse = authService.Authenticate(ConnectionData.User, ConnectionData.Password);
+                Console.WriteLine("Reply: " + AuthResponse.Status + " " + AuthResponse.Rate);
 			}
 			catch (WebException exception)
 			{
@@ -196,11 +208,6 @@ namespace LibOfLegends
 			RPCNetConnection.Call(EndpointString, destination, null, operation, responder, arguments);
 		}
 
-        void GetGameInternal(Responder<GameState> responder, object[] arguments)
-        {
-            Call(GameService, "getGame", responder, arguments);
-        }
-
 		void GetSummonerByNameInternal(Responder<PublicSummoner> responder, object[] arguments)
 		{
 			Call(SummonerService, "getSummonerByName", responder, arguments);
@@ -294,11 +301,6 @@ namespace LibOfLegends
 		#endregion
 
 		#region Blocking RPC
-
-        public GameState getGameById(int gameID)
-        {
-            return (new InternalCallContext<GameState>(GetGameInternal, new object[] { gameID })).Execute();
-        }
 
 		public PublicSummoner GetSummonerByName(string name)
 		{
