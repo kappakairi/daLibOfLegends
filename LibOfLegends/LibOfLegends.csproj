@@ -62,6 +62,8 @@
     <Compile Include="com\riotgames\platform\gameclient\domain\AbstractDomainObject.cs" />
     <Compile Include="com\riotgames\platform\gameclient\domain\AllPublicSummonerDataDTO.cs" />
     <Compile Include="com\riotgames\platform\game\BannedChampion.cs" />
+    <Compile Include="com\riotgames\platform\game\map\GameMap.cs" />
+    <Compile Include="com\riotgames\platform\game\PracticeGameConfig.cs" />
     <Compile Include="com\riotgames\platform\game\PlayerCredentialsDTO.cs" />
     <Compile Include="com\riotgames\platform\game\PlatformGameLifecycleDTO.cs" />
     <Compile Include="com\riotgames\platform\game\GameObserver.cs" />

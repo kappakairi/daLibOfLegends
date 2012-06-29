@@ -51,6 +51,22 @@ namespace LibOfLegends
             Call(serviceName, "retrieveInProgressGameInfo", responder, arguments);
         }
 
+        /** Creates a custom practice game based on the 
+         * PracticeGameConfig class passed to it
+         */
+        void CreatePracticeGame(Responder<GameDTO> responder, object[] arguments)
+        {
+            Call(serviceName, "createPracticeGame", responder, arguments);
+        }
+
+        /** Quit the current game Lobby that
+         * the summoner is in
+         */
+        void QuitGame(Responder<string> responder, object[] arguments)
+        {
+            Call(serviceName, "quitGame", responder, arguments);
+        }
+
         /** Tells the client that GameMessage was received
          * Possible Values (int GameId, string Message)
          * Messages: GameClientConnectedToServer
@@ -101,6 +117,18 @@ namespace LibOfLegends
         public PlatformGameLifecycleDTO retrieveInProgressGameInfo()
         {
             return (new InternalCallContext<PlatformGameLifecycleDTO>(RetrieveInProgressGameInfoInternal, new object[] { })).Execute();
+        }
+
+        public GameDTO createPracticeGame(PracticeGameConfig gameCfg)
+        {
+            return (new InternalCallContext<GameDTO>(CreatePracticeGame, new object[] { gameCfg })).Execute();
+        }
+
+        public bool quitGame()
+        {
+            new InternalCallContext<string>(QuitGame, new object[] { }).Execute();
+
+            return true;
         }
 
         #endregion

@@ -28,5 +28,19 @@ namespace com.riotgames.platform.game
         public string TypeName;
         /** \brief Game Map and configuration */
         public GameMap gameMap;
+
+        public PracticeGameConfig(string gName, string gPass)
+        {
+            gameName = gName;
+            gamePassword = gPass;
+            passbackUrl = null;
+            passbackDataPacket = null;
+            allowSpectators = "ALL";
+            gameTypeConfig = 1;
+            gameMode = "CLASSIC";
+            maxNumPlayers = 10;
+            TypeName = "com.riotgames.platform.game.PracticeGameConfig";
+            gameMap = new GameMap(1);
+        }
     }
 }
