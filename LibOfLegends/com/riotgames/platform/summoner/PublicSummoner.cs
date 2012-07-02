@@ -8,13 +8,13 @@ namespace com.riotgames.platform.summoner
 	{
 		public string internalName;
 		public string name;
-		public int acctId;
+		public long acctId;
 		public int profileIconId;
 		public object summonerAssociatedTalents;
 		public DateTime revisionDate;
 		public int revisionId;
 		public int summonerLevel;
-		public int summonerId;
+		public long summonerId;
 
 		public PublicSummoner()
 		{
