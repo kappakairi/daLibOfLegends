@@ -64,7 +64,7 @@ namespace com.riotgames.platform.statistics
         /** \brief Boost IP earned */             
 		public int boostIpEarned;
         /** \brief Game ID */            
-		public int gameId;
+		public long gameId;
         /** \brief Time in Queue in seconds? */                 
 		public int timeInQueue;
         /** \brief IP Earned */                
