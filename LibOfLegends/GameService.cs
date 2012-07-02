@@ -31,6 +31,11 @@ namespace LibOfLegends
             RPC.RPCNetConnection.Call(RPCService.EndpointString, destination, null, operation, responder, arguments);
         }
 
+        void JoinGame(Responder<GameDTO> responder, object[] arguments)
+        {
+            Call(serviceName, "joinGame", responder, arguments);
+        }
+
         void GetGameStateInternal(Responder<GameDTO> responder, object[] arguments)
         {
             Call(serviceName, "getLatestGameTimerState", responder, arguments);
@@ -109,6 +114,11 @@ namespace LibOfLegends
         #endregion
 
         #region Blocking RPC
+
+        public GameDTO joinGame(long gameID, string pass)
+        {
+            return (new InternalCallContext<GameDTO>(JoinGame, new object[] { gameID, pass })).Execute();
+        }
 
         public GameDTO getGameState(double gameID, string gameState, int rand)
         {
