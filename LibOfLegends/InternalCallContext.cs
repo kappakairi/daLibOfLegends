@@ -36,7 +36,8 @@ namespace LibOfLegends
 				if (CallFault != null)
 				{
 					//An error occurred, throw an exception
-					throw new RPCException(CallFault.FaultString);
+					//throw new RPCException(CallFault.FaultString);
+                    return Result;
 				}
 				else
 					return Result;
