@@ -114,6 +114,7 @@
     <Compile Include="com\riotgames\team\dto\PlayerDTO.cs" />
     <Compile Include="com\riotgames\team\TeamId.cs" />
     <Compile Include="ConnectionProfile.cs" />
+    <Compile Include="SummonerService.cs" />
     <Compile Include="matchmakerService.cs" />
     <Compile Include="GameResult.cs" />
     <Compile Include="GameService.cs" />
