@@ -47,6 +47,7 @@ namespace LibOfLegends
 
         public GameService game;
         public MatchmakerService matchmaker;
+        public SummonerService summoner;
 
         #endregion
 
@@ -75,6 +76,7 @@ namespace LibOfLegends
             /** Create service objects to call RPC functions */
             game = new GameService(this);
             matchmaker = new MatchmakerService(this);
+            summoner = new SummonerService(this);
 		}
 
 		public void Connect()
