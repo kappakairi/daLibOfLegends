@@ -263,37 +263,37 @@ namespace LibOfLegends
 			GetSummonerByNameInternal(responder, new object[] { name });
 		}
 
-		public void GetRecentGamesAsync(int accountID, Responder<RecentGames> responder)
+		public void GetRecentGamesAsync(long accountID, Responder<RecentGames> responder)
 		{
 			GetRecentGamesInternal(responder, new object[] { accountID });
 		}
 
-		public void GetAllPublicSummonerDataByAccountAsync(int accountID, Responder<AllPublicSummonerDataDTO> responder)
+		public void GetAllPublicSummonerDataByAccountAsync(long accountID, Responder<AllPublicSummonerDataDTO> responder)
 		{
 			GetAllPublicSummonerDataByAccountInternal(responder, new object[] { accountID });
 		}
 
-		public void GetAllSummonerDataByAccountAsync(int accountID, Responder<AllSummonerData> responder)
+		public void GetAllSummonerDataByAccountAsync(long accountID, Responder<AllSummonerData> responder)
 		{
 			GetAllSummonerDataByAccountInternal(responder, new object[] { accountID });
 		}
 
-		public void GetSummonerNamesAsync(List<int> summonerIDs, Responder<List<string>> responder)
+		public void GetSummonerNamesAsync(List<long> summonerIDs, Responder<List<string>> responder)
 		{
 			GetSummonerNamesInternal(responder, new object[] { summonerIDs });
 		}
 
-		public void RetrievePlayerStatsByAccountIDAsync(int accountID, string season, Responder<PlayerLifeTimeStats> responder)
+		public void RetrievePlayerStatsByAccountIDAsync(long accountID, string season, Responder<PlayerLifeTimeStats> responder)
 		{
 			RetrievePlayerStatsByAccountIDInternal(responder, new object[] { accountID, season });
 		}
 
-		public void GetAggregatedStatsAsync(int accountID, string gameMode, string season, Responder<AggregatedStats> responder)
+		public void GetAggregatedStatsAsync(long accountID, string gameMode, string season, Responder<AggregatedStats> responder)
 		{
 			GetAggregatedStatsInternal(responder, new object[] { accountID, gameMode, season });
 		}
 
-		public void FindPlayerAsync(int summonerID, Responder<PlayerDTO> responder)
+		public void FindPlayerAsync(long summonerID, Responder<PlayerDTO> responder)
 		{
 			FindPlayerInternal(responder, new object[] { summonerID });
 		}
@@ -307,33 +307,34 @@ namespace LibOfLegends
 			return (new InternalCallContext<PublicSummoner>(GetSummonerByNameInternal, new object[] { name })).Execute();
 		}
 
-		public RecentGames GetRecentGames(int accountID)
+		public RecentGames GetRecentGames(long accountID)
 		{
 			return (new InternalCallContext<RecentGames>(GetRecentGamesInternal, new object[] { accountID })).Execute();
 		}
 
-		public AllPublicSummonerDataDTO GetAllPublicSummonerDataByAccount(int accountID)
+		public AllPublicSummonerDataDTO GetAllPublicSummonerDataByAccount(long accountID)
 		{
 			return (new InternalCallContext<AllPublicSummonerDataDTO>(GetAllPublicSummonerDataByAccountInternal, new object[] { accountID })).Execute();
 		}
 
+        // z
 		//I don't understand how this one works anymore, always returns null for me
-		public AllSummonerData GetAllSummonerDataByAccount(int accountID)
+		public AllSummonerData GetAllSummonerDataByAccount(long accountID)
 		{
 			return (new InternalCallContext<AllSummonerData>(GetAllSummonerDataByAccountInternal, new object[] { accountID })).Execute();
 		}
 
-		public List<string> GetSummonerNames(List<int> summonerIDs)
+		public List<string> GetSummonerNames(List<long> summonerIDs)
 		{
 			return (new InternalCallContext<List<string>>(GetSummonerNamesInternal, new object[] { summonerIDs })).Execute();
 		}
 
-		public PlayerLifeTimeStats RetrievePlayerStatsByAccountID(int accountID, string season)
+		public PlayerLifeTimeStats RetrievePlayerStatsByAccountID(long accountID, string season)
 		{
 			return (new InternalCallContext<PlayerLifeTimeStats>(RetrievePlayerStatsByAccountIDInternal, new object[] { accountID, season })).Execute();
 		}
 
-		public AggregatedStats GetAggregatedStats(int accountID, string gameMode, string season)
+		public AggregatedStats GetAggregatedStats(long accountID, string gameMode, string season)
 		{
 			return (new InternalCallContext<AggregatedStats>(GetAggregatedStatsInternal, new object[] { accountID, gameMode, season })).Execute();
 		}
