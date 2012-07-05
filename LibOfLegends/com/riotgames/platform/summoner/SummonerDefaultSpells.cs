@@ -14,6 +14,11 @@ namespace com.riotgames.platform.summoner
 
         public static string classicKey = "CLASSIC";
 
+        private SummonerDefaultSpells()
+        {
+            summonerDefaultSpellMap = new Dictionary<string,object>();
+        }
+
         private Dictionary<string, SummonerDefaultSpells>  getSummonerDefaultSpells()
         {
             Dictionary<string, SummonerDefaultSpells> tmp = new Dictionary<string, SummonerDefaultSpells>();

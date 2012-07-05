@@ -58,11 +58,16 @@
     <Compile Include="AuthResponse.cs" />
     <Compile Include="AuthService.cs" />
     <Compile Include="ChampionStatistics.cs" />
+    <Compile Include="com\riotgames\platform\catlog\Effect.cs" />
+    <Compile Include="com\riotgames\platform\catlog\ItemEffect.cs" />
+    <Compile Include="com\riotgames\platform\catlog\runes\Rune.cs" />
+    <Compile Include="com\riotgames\platform\catlog\runes\RuneType.cs" />
     <Compile Include="com\riotgames\platform\clientfacade\domain\LoginDatapacket.cs" />
     <Compile Include="com\riotgames\platform\gameclient\domain\AbstractDomainObject.cs" />
     <Compile Include="com\riotgames\platform\gameclient\domain\AllPublicSummonerDataDTO.cs" />
     <Compile Include="com\riotgames\platform\game\BannedChampion.cs" />
     <Compile Include="com\riotgames\platform\game\map\GameMap.cs" />
+    <Compile Include="com\riotgames\platform\game\GameTypeConfigDTO.cs" />
     <Compile Include="com\riotgames\platform\game\PracticeGameConfig.cs" />
     <Compile Include="com\riotgames\platform\game\PlayerCredentialsDTO.cs" />
     <Compile Include="com\riotgames\platform\game\PlatformGameLifecycleDTO.cs" />
@@ -92,6 +97,11 @@
     <Compile Include="com\riotgames\platform\gameclient\domain\game\GameReconnectionInfo.cs" />
     <Compile Include="com\riotgames\platform\gameclient\domain\RawStat.cs" />
     <Compile Include="com\riotgames\platform\gameclient\domain\Spell.cs" />
+    <Compile Include="com\riotgames\platform\summoner\masterybook\MasteryBook.cs" />
+    <Compile Include="com\riotgames\platform\summoner\masterybook\MasteryBookPage.cs" />
+    <Compile Include="com\riotgames\platform\summoner\masterybook\TalentEntry.cs" />
+    <Compile Include="com\riotgames\platform\summoner\RuneSlot.cs" />
+    <Compile Include="com\riotgames\platform\summoner\SummonerCatalog.cs" />
     <Compile Include="com\riotgames\platform\summoner\Summoner.cs" />
     <Compile Include="com\riotgames\platform\summoner\SummonerDefaultSpells.cs" />
     <Compile Include="com\riotgames\platform\gameclient\login\Login.cs" />
@@ -109,6 +119,8 @@
     <Compile Include="com\riotgames\platform\summoner\SummonerLevelAndPoints.cs" />
     <Compile Include="com\riotgames\platform\summoner\SummonerTalentsAndPoints.cs" />
     <Compile Include="com\riotgames\platform\summoner\Talent.cs" />
+    <Compile Include="com\riotgames\platform\summoner\TalentGroup.cs" />
+    <Compile Include="com\riotgames\platform\summoner\TalentRow.cs" />
     <Compile Include="com\riotgames\platform\systemstate\ClientSystemStatesNotification.cs" />
     <Compile Include="com\riotgames\team\CreatedTeam.cs" />
     <Compile Include="com\riotgames\team\dto\PlayerDTO.cs" />

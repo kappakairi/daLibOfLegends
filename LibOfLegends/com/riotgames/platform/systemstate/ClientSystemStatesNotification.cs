@@ -9,7 +9,7 @@ using FluorineFx.AMF3;
 namespace com.riotgames.platform.systemstate
 {
 	[DataContract]
-	class ClientSystemStatesNotification : IExternalizable
+	public class ClientSystemStatesNotification : IExternalizable
 	{
 		[DataMember]
 		public bool practiceGameEnabled;
