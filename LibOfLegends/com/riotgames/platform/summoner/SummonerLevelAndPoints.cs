@@ -7,6 +7,6 @@ namespace com.riotgames.platform.summoner
 		public int infPoints;
 		public int expPoints;
 		public int summonerLevel;
-		public int summonerId;
+		public long summonerId;
 	}
 }

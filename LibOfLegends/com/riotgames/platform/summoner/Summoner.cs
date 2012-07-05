@@ -8,9 +8,9 @@ namespace com.riotgames.platform.summoner
 	public class Summoner : AbstractDomainObject
 	{
 		public string internalName;
-		public int acctid;
+		public long acctid;
 		public bool helpFlag;
-		public int sumId;
+		public long sumId;
 		public int profileIconId;
 		public bool displayEloQuestionaire;
 		public DateTime lastGameDate;
@@ -21,7 +21,7 @@ namespace com.riotgames.platform.summoner
 		public string name;
 		public bool nameChangeFlag;
 		public bool tutorialFlag;
-		//Unknown type
+		/** Unknown type, doesn't seem to be in use */
 		public List<object> socialNetworkUserIds;
 	}
 }

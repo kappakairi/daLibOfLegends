@@ -1,4 +1,10 @@
-﻿using com.riotgames.platform.gameclient.domain;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using com.riotgames.platform.gameclient.domain;
+using com.riotgames.platform.catlog.runes;
 
 namespace com.riotgames.platform.summoner.spellbook
 {
@@ -6,9 +12,7 @@ namespace com.riotgames.platform.summoner.spellbook
 	{
 		public int runeId;
 		public int runeSlotId;
-		//Not sure about type as it is null
-		public object runeSlot;
-		//Not sure about type as it is null
-		public object rune;
+        public RuneSlot runeSlot;
+		public Rune rune;
 	}
 }

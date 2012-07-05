@@ -1,15 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using FluorineFx.AMF3;
 
 using com.riotgames.platform.statistics;
 using com.riotgames.platform.systemstate;
+using com.riotgames.platform.game;
 
 #pragma warning disable 0649
 
+using com.riotgames.platform.summoner;
+
 namespace com.riotgames.platform.clientfacade.domain
 {
-	class LoginDataPacket
+	public class LoginDataPacket
 	{
 		public double rpBalance;
 		public double minutesUntilMidnight;
@@ -21,10 +25,10 @@ namespace com.riotgames.platform.clientfacade.domain
 		public object reconnectInfo;                // TODO check this
 		public bool minor;
 		public string platformId;
-		public ArrayCollection gameTypeConfigs;        // TODO fix this
+		public List<GameTypeConfigDTO> gameTypeConfigs;
 		public double ipBalance;
 		public ClientSystemStatesNotification clientSystemStates;
-		public object summonerCatalog;                    // TODO fix this
+		public SummonerCatalog summonerCatalog;
 		public ArrayCollection languages;
 		public object allSummonerData;
 		public int leaverPenaltyLevel;

@@ -10,6 +10,6 @@ namespace com.riotgames.platform.summoner.spellbook
 		public object bookPagesJson;
 		public List<SpellBookPage> bookPages;
 		public string dateString;
-		public int summonerId;
+		public long summonerId;
 	}
 }

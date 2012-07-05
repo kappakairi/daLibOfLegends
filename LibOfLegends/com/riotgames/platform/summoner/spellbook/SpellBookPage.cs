@@ -12,6 +12,6 @@ namespace com.riotgames.platform.summoner.spellbook
 		public List<SlotEntry> slotEntries;
 		public bool current;
 		public DateTime createDate;
-		public int summonerId;
+		public long summonerId;
 	}
 }

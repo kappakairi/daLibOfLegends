@@ -9,9 +9,10 @@ namespace com.riotgames.platform.summoner
 	{
 		public int talentPoints;
 		public int unusedTalentPoints;
+        // TODO check this, no longer shows up on RPC call
 		public List<SummonerAssociatedTalent> summonerAssociatedTalents;
 		public DateTime modifyDate;
 		public DateTime createDate;
-		public int summonerId;
+		public long summonerId;
 	}
 }

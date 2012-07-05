@@ -8,8 +8,22 @@ namespace com.riotgames.platform.summoner
 	{
 		public string summonerDefaultSpellsJson;
 		//This is still broken, it doesn't get mapped properly and results in an empty dictionary unless the object type is used
-		public Dictionary<string, SummonerGameModeSpells> summonerDefaultSpellMap;
-		//public Dictionary<string, object> summonerDefaultSpellMap;
-		public int summonerId;
+        //Therefore must be retrieved by GETTER method getSummonerDefaultSpells()
+		private Dictionary<string, object> summonerDefaultSpellMap;
+		public long summonerId;
+
+        public static string classicKey = "CLASSIC";
+
+        private Dictionary<string, SummonerDefaultSpells>  getSummonerDefaultSpells()
+        {
+            Dictionary<string, SummonerDefaultSpells> tmp = new Dictionary<string, SummonerDefaultSpells>();
+
+            if (summonerDefaultSpellMap.ContainsKey(classicKey))
+            {
+                tmp[classicKey] = summonerDefaultSpellMap[classicKey] as SummonerDefaultSpells;
+            }
+
+            return tmp;
+        }
 	}
 }
