@@ -6,13 +6,17 @@ using System.Threading;
 using FluorineFx;
 using FluorineFx.Messaging.Messages;
 using FluorineFx.Net;
+using FluorineFx.Messaging.Services.Messaging;
 
 using com.riotgames.platform.clientfacade.domain;
 using com.riotgames.platform.gameclient.domain;
+using com.riotgames.platform.matchmaking;
 using com.riotgames.platform.game;
 using com.riotgames.platform.login;
 using com.riotgames.platform.statistics;
 using com.riotgames.platform.summoner;
+using com.riotgames.platform.summoner.boost;
+using com.riotgames.platform.catlog.champion;
 using com.riotgames.team.dto;
 
 namespace LibOfLegends
@@ -36,10 +40,14 @@ namespace LibOfLegends
 		public const string EndpointString = "my-rtmps";
 
 		const string SummonerService = "summonerService";
+        const string InventoryService = "inventoryService";
 		const string PlayerStatsService = "playerStatsService";
+        const string MatchmakerService = "matchmakerService";
         const string GameStatsService = "gameStatsService";
 		const string ClientFacadeService = "clientFacadeService";
 		const string SummonerTeamService = "summonerTeamService";
+        const string LoginService = "loginService";
+        const string MasteryService = "masteryBookService";
 
         #endregion
 
@@ -48,6 +56,10 @@ namespace LibOfLegends
         public GameService game;
         public MatchmakerService matchmaker;
         public SummonerService summoner;
+        public ClientFacadeService clientFacade;
+        public InventoryService inventory;
+        public LoginService login;
+        public MasteryService mastery;
 
         #endregion
 
@@ -77,6 +89,10 @@ namespace LibOfLegends
             game = new GameService(this);
             matchmaker = new MatchmakerService(this);
             summoner = new SummonerService(this);
+            clientFacade = new ClientFacadeService(this);
+            inventory = new InventoryService(this);
+            login = new LoginService(this);
+            mastery = new MasteryService(this);
 		}
 
 		public void Connect()
@@ -95,10 +111,14 @@ namespace LibOfLegends
 		{
 			try
 			{
+                Console.WriteLine("Logging in with username " + ConnectionData.User + "...");
 				AuthService authService = new AuthService(ConnectionData.Region.LoginQueueURL, ConnectionData.Proxy.LoginQueueProxy);
 				// Get an Auth token (Dumb, assumes no queueing, blocks)
 				AuthResponse = authService.Authenticate(ConnectionData.User, ConnectionData.Password);
-                Console.WriteLine("Reply: " + AuthResponse.Status + " " + AuthResponse.Rate);
+                if (AuthResponse.Status == "LOGIN")
+                    Console.WriteLine("Login successful.");
+                else if (AuthResponse.Status == "QUEUE")
+                    Console.WriteLine("Queue to login to server.");
 			}
 			catch (WebException exception)
 			{
@@ -189,8 +209,29 @@ namespace LibOfLegends
 			ConnectCallback(new RPCConnectResult(RPCConnectResultType.LoginFault, fault));
 		}
 
+        void OnMessagingDestSubscribe(object obj)
+        {
+            Console.WriteLine("Subscribed successfully.");
+        }
+
+        void OnMessagingDestFault(Fault fault)
+        {
+            Console.WriteLine("FAILURE TO SUBSCRIBE");
+        }
+
 		void OnFlexLogin(string message)
 		{
+            // Subscribe to destinations
+            RPCNetConnection.Command(EndpointString, "messagingDestination", "subscribe", "gn-442321", new Responder<object>(OnMessagingDestSubscribe, OnMessagingDestFault), null);
+            RPCNetConnection.Command(EndpointString, "messagingDestination", "subscribe", "cn-442321", new Responder<object>(OnMessagingDestSubscribe, OnMessagingDestFault), null);
+            RPCNetConnection.Command(EndpointString, "messagingDestination", "subscribe", "bc-442321", new Responder<object>(OnMessagingDestSubscribe, OnMessagingDestFault), null); 
+
+            // Get LoginDataPacket from server
+            object[] blankArr = new object[0];
+            RPCNetConnection.Call(EndpointString, ClientFacadeService, null, "getLoginDataPacketForUser", new Responder<LoginDataPacket>(OnDataPacket, OnDataPacketFault), blankArr);
+            RPCNetConnection.Call(EndpointString, MatchmakerService, null, "getAvailableQueues", new Responder<List<GameQueueConfig>>(OnQueues, OnQueuesFault), blankArr);
+            RPCNetConnection.Call(EndpointString, InventoryService, null, "getSumonerActiveBoosts", new Responder<SummonerActiveBoostsDTO>(OnBoost, OnBoostFault), blankArr);
+            RPCNetConnection.Call(EndpointString, InventoryService, null, "getAvailableChampions", new Responder<List<ChampionDTO>>(OnAvailableChamp, OnAvailableChampFault), blankArr);
 			ConnectCallback(new RPCConnectResult(message));
 		}
 
@@ -198,6 +239,54 @@ namespace LibOfLegends
 		{
 			ConnectCallback(new RPCConnectResult(RPCConnectResultType.FlexLoginFault, fault));
 		}
+
+        void OnDataPacket(LoginDataPacket pk)
+        {
+            clientFacade.loginDataPacket = pk;
+
+            Console.WriteLine("Received User login details from server.");
+        }
+
+        void OnDataPacketFault(Fault fault)
+        {
+            Console.WriteLine("User's LoginDataPacket could not be loaded.");
+        }
+
+        void OnQueues(List<GameQueueConfig> qu)
+        {
+            matchmaker.availableQueues = qu;
+
+            Console.WriteLine("Received GameQueueConfig details from server.");
+        }
+
+        void OnQueuesFault(Fault fault)
+        {
+            Console.WriteLine("GameQueueConfig could not be loaded.");
+        }
+        
+        void OnBoost(SummonerActiveBoostsDTO bo)
+        {
+            inventory.activeBoosts = bo;
+
+            Console.WriteLine("Received Summoner's active boosts details from server.");
+        }
+
+        void OnBoostFault(Fault fault)
+        {
+            Console.WriteLine("Summoner's active boosts details could not be loaded. " + fault.FaultString + " " + fault.FaultDetail);
+        }
+
+        void OnAvailableChamp(List<ChampionDTO> ch)
+        {
+            inventory.availableChampions = ch;
+
+            Console.WriteLine("Received available champions details from server.");
+        }
+
+        void OnAvailableChampFault(Fault fault)
+        {
+            Console.WriteLine("Avaiable champions details could not be loaded. " + fault.FaultString + " " + fault.FaultDetail);
+        }
 
 		#endregion
 
@@ -209,6 +298,18 @@ namespace LibOfLegends
 				throw new RPCNotConnectedException("Connection has not been initialised yet");
 			RPCNetConnection.Call(EndpointString, destination, null, operation, responder, arguments);
 		}
+
+        void Receive<ResponderType>(Responder<ResponderType> responder)
+        {
+            if (RPCNetConnection == null)
+                throw new RPCNotConnectedException("Connection has not been initialised yet");
+            RPCNetConnection.Receive<ResponderType>(responder);
+        }
+
+        void ReceiveGameDTOInternal(Responder<GameDTO> responder)
+        {
+            Receive<GameDTO>(responder);
+        }
 
 		void GetSummonerByNameInternal(Responder<PublicSummoner> responder, object[] arguments)
 		{
@@ -251,14 +352,20 @@ namespace LibOfLegends
 		}
 
 		//This call is not exposed to the outside
-		void GetLoginDataPacketForUserInternal(Responder<LoginDataPacket> responder)
+		void GetLoginDataPacketForUserInternal(Responder<LoginDataPacket> responder, object[] arguments)
 		{
-			Call( ClientFacadeService, "getLoginDataPacketForUser", responder, new object[] {});
+            object[] temp = new object[0];
+			Call(ClientFacadeService, "getLoginDataPacketForUser", responder, arguments);
 		}
 
 		#endregion
 
 		#region Non-blocking RPC
+
+        public void receiveGameDTO(Responder<GameDTO> responder)
+        {
+            ReceiveGameDTOInternal(responder);
+        }
 
 		public void GetSummonerByNameAsync(string name, Responder<PublicSummoner> responder)
 		{
@@ -303,6 +410,11 @@ namespace LibOfLegends
 		#endregion
 
 		#region Blocking RPC
+
+        public LoginDataPacket GetLoginDataPacket()
+        {
+            return (new InternalCallContext<LoginDataPacket>(GetLoginDataPacketForUserInternal, new object[] { })).Execute();
+        }
 
 		public PublicSummoner GetSummonerByName(string name)
 		{

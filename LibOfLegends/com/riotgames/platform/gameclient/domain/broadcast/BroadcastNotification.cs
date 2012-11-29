@@ -9,7 +9,7 @@ using FluorineFx.AMF3;
 namespace com.riotgames.platform.gameclient.domain.broadcast
 {
 	[DataContract]
-	public class BroadcastNotification : IExternalizable
+	public class BroadcastNotification
 	{
 		[DataMember]
 		public ArrayCollection broadcastMessages;

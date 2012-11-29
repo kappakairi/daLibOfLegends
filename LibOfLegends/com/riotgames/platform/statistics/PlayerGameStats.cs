@@ -44,7 +44,7 @@ namespace com.riotgames.platform.statistics
         /** \brief Marked as AFK? */                
 		public bool afk;
         /** \brief Some random ID??? */          
-		public int id;
+		public long id;
         /** \brief boost XP Earned */             
 		public int boostXpEarned;
         /** \brief Summoner Level after game */              

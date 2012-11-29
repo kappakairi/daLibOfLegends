@@ -35,7 +35,7 @@
   <ItemGroup>
     <Reference Include="FluorineFx, Version=1.0.0.17, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\WESA\LOLQuery Libraries\FluorineFX\FluorineFx.dll</HintPath>
+      <HintPath>..\..\..\..\WESA\LOL Profiler\FluorineFXMods\Bin\net\4.0\FluorineFx.dll</HintPath>
     </Reference>
     <Reference Include="Nil, Version=0.1.4444.6511, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -58,6 +58,9 @@
     <Compile Include="AuthResponse.cs" />
     <Compile Include="AuthService.cs" />
     <Compile Include="ChampionStatistics.cs" />
+    <Compile Include="com\riotgames\platform\broadcast\BroadcastNotification.cs" />
+    <Compile Include="com\riotgames\platform\catlog\champion\ChampionDTO.cs" />
+    <Compile Include="com\riotgames\platform\catlog\champion\ChampionSkinDTO.cs" />
     <Compile Include="com\riotgames\platform\catlog\Effect.cs" />
     <Compile Include="com\riotgames\platform\catlog\ItemEffect.cs" />
     <Compile Include="com\riotgames\platform\catlog\runes\Rune.cs" />
@@ -76,9 +79,11 @@
     <Compile Include="com\riotgames\platform\game\PlayerChampionSelectionDTO.cs" />
     <Compile Include="com\riotgames\platform\game\GameDTO.cs" />
     <Compile Include="com\riotgames\platform\game\GameState.cs" />
+    <Compile Include="com\riotgames\platform\matchmaking\GameQueueConfig.cs" />
     <Compile Include="com\riotgames\platform\matchmaking\QueueInfo.cs" />
     <Compile Include="com\riotgames\platform\matchmaking\MatchMakerParams.cs" />
     <Compile Include="com\riotgames\platform\matchmaking\SearchingForMatchNotification.cs" />
+    <Compile Include="com\riotgames\platform\matchmaking\MatchingThrottleConfig.cs" />
     <Compile Include="com\riotgames\platform\statistics\AggregatedStat.cs" />
     <Compile Include="com\riotgames\platform\statistics\AggregatedStats.cs" />
     <Compile Include="com\riotgames\platform\statistics\AggregatedStatsKey.cs" />
@@ -97,6 +102,7 @@
     <Compile Include="com\riotgames\platform\gameclient\domain\game\GameReconnectionInfo.cs" />
     <Compile Include="com\riotgames\platform\gameclient\domain\RawStat.cs" />
     <Compile Include="com\riotgames\platform\gameclient\domain\Spell.cs" />
+    <Compile Include="com\riotgames\platform\summoner\boost\SummonerActiveBoostsDTO.cs" />
     <Compile Include="com\riotgames\platform\summoner\masterybook\MasteryBook.cs" />
     <Compile Include="com\riotgames\platform\summoner\masterybook\MasteryBookPage.cs" />
     <Compile Include="com\riotgames\platform\summoner\masterybook\TalentEntry.cs" />
@@ -121,13 +127,20 @@
     <Compile Include="com\riotgames\platform\summoner\Talent.cs" />
     <Compile Include="com\riotgames\platform\summoner\TalentGroup.cs" />
     <Compile Include="com\riotgames\platform\summoner\TalentRow.cs" />
+    <Compile Include="com\riotgames\platform\systemstate\ClientSystemStatesJson.cs" />
     <Compile Include="com\riotgames\platform\systemstate\ClientSystemStatesNotification.cs" />
+    <Compile Include="com\riotgames\platform\systemstate\GameMapEnabledDTO.cs" />
+    <Compile Include="com\riotgames\platform\systemstate\QueueThrottleDTO.cs" />
     <Compile Include="com\riotgames\team\CreatedTeam.cs" />
     <Compile Include="com\riotgames\team\dto\PlayerDTO.cs" />
     <Compile Include="com\riotgames\team\TeamId.cs" />
     <Compile Include="ConnectionProfile.cs" />
+    <Compile Include="ClientFacadeService.cs" />
+    <Compile Include="MasteryService.cs" />
+    <Compile Include="LoginService.cs" />
+    <Compile Include="InventoryService.cs" />
     <Compile Include="SummonerService.cs" />
-    <Compile Include="matchmakerService.cs" />
+    <Compile Include="MatchmakerService.cs" />
     <Compile Include="GameResult.cs" />
     <Compile Include="GameService.cs" />
     <Compile Include="InternalCallContext.cs" />

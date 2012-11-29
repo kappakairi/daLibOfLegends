@@ -9,11 +9,12 @@ namespace com.riotgames.platform.summoner
 		public string summonerDefaultSpellsJson;
 		//This is still broken, it doesn't get mapped properly and results in an empty dictionary unless the object type is used
         //Therefore must be retrieved by GETTER method getSummonerDefaultSpells()
-		private Dictionary<string, object> summonerDefaultSpellMap;
+		public Dictionary<string, object> summonerDefaultSpellMap;
 		public long summonerId;
 
         public static string classicKey = "CLASSIC";
 
+        /*
         private SummonerDefaultSpells()
         {
             summonerDefaultSpellMap = new Dictionary<string,object>();
@@ -30,5 +31,6 @@ namespace com.riotgames.platform.summoner
 
             return tmp;
         }
+         */
 	}
 }

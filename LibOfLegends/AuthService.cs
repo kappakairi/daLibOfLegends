@@ -57,6 +57,7 @@ namespace LibOfLegends
 			// WRONG! We don't take into account encoding here.
 			// But it'll probably work, so write the body to the request.
 			request.ContentLength = postBody.Length;
+
 			StreamWriter writer = new StreamWriter(request.GetRequestStream());
 			writer.Write(postBody);
 			writer.Close();

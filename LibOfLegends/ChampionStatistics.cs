@@ -139,5 +139,115 @@ namespace LibOfLegends
 			}
 			return output.Values.ToList();
 		}
+
+        public static int totalRankedKills(List<ChampionStatistics> champStats)
+        {
+            int value = 0;
+            for (int i = 0; i < champStats.Count; i++)
+                value += champStats[i].Kills;
+
+            return value;
+        }
+
+        public static int totalRankedDeaths(List<ChampionStatistics> champStats)
+        {
+            int value = 0;
+            for (int i = 0; i < champStats.Count; i++)
+                value += champStats[i].Deaths;
+
+            return value;
+        }
+
+        public static int totalRankedAssists(List<ChampionStatistics> champStats)
+        {
+            int value = 0;
+            for (int i = 0; i < champStats.Count; i++)
+                value += champStats[i].Assists;
+
+            return value;
+        }
+
+        public static int totalRankedPentaKills(List<ChampionStatistics> champStats)
+        {
+            int value = 0;
+            for (int i = 0; i < champStats.Count; i++)
+                value += champStats[i].PentaKills;
+
+            return value;
+        }
+
+        public static int totalRankedQuadraKills(List<ChampionStatistics> champStats)
+        {
+            int value = 0;
+            for (int i = 0; i < champStats.Count; i++)
+                value += champStats[i].QuadraKills;
+
+            return value;
+        }
+
+        public static int totalRankedTripleKills(List<ChampionStatistics> champStats)
+        {
+            int value = 0;
+            for (int i = 0; i < champStats.Count; i++)
+                value += champStats[i].TripleKills;
+
+            return value;
+        }
+
+        public static int totalRankedDoubleKills(List<ChampionStatistics> champStats)
+        {
+            int value = 0;
+            for (int i = 0; i < champStats.Count; i++)
+                value += champStats[i].DoubleKills;
+
+            return value;
+        }
+
+        public static long totalRankedGoldEarned(List<ChampionStatistics> champStats)
+        {
+            int value = 0;
+            for (int i = 0; i < champStats.Count; i++)
+                value += champStats[i].Gold;
+
+            return value;
+        }
+
+        public static int totalRankedMinionKills(List<ChampionStatistics> champStats)
+        {
+            int value = 0;
+            for (int i = 0; i < champStats.Count; i++)
+                value += champStats[i].MinionKills;
+
+            return value;
+        }
+
+        public static int totalRankedTurretsDestroyed(List<ChampionStatistics> champStats)
+        {
+            int value = 0;
+            for (int i = 0; i < champStats.Count; i++)
+                value += champStats[i].TurretsDestroyed;
+
+            return value;
+        }
+
+        public static int rankedMostKills(List<ChampionStatistics> champStats)
+        {
+            int value = 0;
+            for (int i = 0; i < champStats.Count; i++)
+                if (value < champStats[i].MaximumKills)
+                    value = champStats[i].MaximumKills;
+
+            return value;
+        }
+
+        public static int rankedMostDeaths(List<ChampionStatistics> champStats)
+        {
+            int value = 0;
+            for (int i = 0; i < champStats.Count; i++)
+                if (value < champStats[i].MaximumDeaths)
+                    value = champStats[i].MaximumDeaths;
+
+            return value;
+        }
 	}
 }

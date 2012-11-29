@@ -30,7 +30,8 @@ namespace LibOfLegends
 
 		public ReturnType Execute()
 		{
-			InternalCall(new Responder<ReturnType>(OnReturn, OnFault), Arguments);
+            InternalCall(new Responder<ReturnType>(OnReturn, OnFault), Arguments);
+
 			if (ReturnEvent.WaitOne(Timeout))
 			{
 				if (CallFault != null)

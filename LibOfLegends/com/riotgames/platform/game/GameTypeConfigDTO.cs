@@ -16,7 +16,7 @@ namespace com.riotgames.platform.game
         public bool exclusivePick;
         public string pickMode;
         public int maxAllowableBans;
-        public int banTimerDuration = 0;
+        public int banTimerDuration;
         public int postPickTimerDuration;
     }
 }

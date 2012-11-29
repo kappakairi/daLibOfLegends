@@ -9,6 +9,7 @@ using com.riotgames.platform.game;
 
 #pragma warning disable 0649
 
+using com.riotgames.platform.broadcast;
 using com.riotgames.platform.summoner;
 
 namespace com.riotgames.platform.clientfacade.domain
@@ -17,22 +18,24 @@ namespace com.riotgames.platform.clientfacade.domain
 	{
 		public double rpBalance;
 		public double minutesUntilMidnight;
+        public string minutesUntilShutdownEnabled;
 		public int leaverBusterPenaltyTime;
-		public bool minorShutdownEnforced;
+		//public bool minorShutdownEnforced;
+        public string minorShutdownEnforced;
 		public bool clientHeartBeatEnabled;
 		public PlayerStatSummaries playerStatSummaries;
 		public int maxPracticeGameSize;
 		public object reconnectInfo;                // TODO check this
 		public bool minor;
 		public string platformId;
-		public List<GameTypeConfigDTO> gameTypeConfigs;
+		public string gameTypeConfigs;
 		public double ipBalance;
-		public ClientSystemStatesNotification clientSystemStates;
+		public string clientSystemStates;
 		public SummonerCatalog summonerCatalog;
 		public ArrayCollection languages;
-		public object allSummonerData;
+		public AllSummonerData allSummonerData;
 		public int leaverPenaltyLevel;
-		public object broadcastNotification;
+		public string broadcastNotification;
 		public bool matchMakingEnabled;
 		public bool inGhostGame;
 
@@ -41,9 +44,11 @@ namespace com.riotgames.platform.clientfacade.domain
         /** \brief Minutes left to earn XP/IP in CoOpvsAi games */
         public int coOpVsAiMinutesLeftToday;
         /** \brief Milliseconds until CoOpvsAi limit is reset */
-        public long coOpVsAiMsecsUntilReset;
+        public double coOpVsAiMsecsUntilReset;
         /** \brief Milliseconds until Custom limit is reset */
-        public long customMsecsUntilReset;
+        public double customMsecsUntilReset;
+
+        public double timeUntilFirstWinOfDay;
 
         // TODO look into clientSystemStates and broadcastNotification, LOLNotes shows JSON exists for those
 	}

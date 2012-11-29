@@ -6,44 +6,55 @@ using System.Text;
 
 using FluorineFx.AMF3;
 
+using com.riotgames.platform.gameclient.domain;
+
 namespace com.riotgames.platform.systemstate
 {
-	[DataContract]
-	public class ClientSystemStatesNotification : IExternalizable
-	{
-		[DataMember]
-		public bool practiceGameEnabled;
-		[DataMember]
-		public bool advancedTutorialEnabled;
-		[DataMember]
-		public int minNumPlayersForPracticeGame;
-		[DataMember]
-		public List<int> practiceGameTypeConfigIdList;
-		[DataMember]
-		public List<int> freeToPlayChampionIdList;
-		[DataMember]
-		public List<int> inactiveChampionIdList;
+    /*
+    [DataContract]
+    public class ClientSystemStatesNotification : IExternalizable
+    {
+        [DataMember]
+        public bool practiceGameEnabled;
+        [DataMember]
+        public bool advancedTutorialEnabled;
+        [DataMember]
+        public int minNumPlayersForPracticeGame;
+        [DataMember]
+        public List<int> practiceGameTypeConfigIdList;
+        [DataMember]
+        public List<int> freeToPlayChampionIdList;
+        [DataMember]
+        public List<int> inactiveChampionIdList;
 
-		public void ReadExternal(IDataInput input)
-		{
-			string json = input.ReadUTF();
-			System.Runtime.Serialization.Json.DataContractJsonSerializer ser = new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(ClientSystemStatesNotification));
+        public void ReadExternal(IDataInput input)
+        {
 
-			Stream s = new MemoryStream(ASCIIEncoding.Default.GetBytes(json));
+            string json = input.ReadUTF();
+            System.Runtime.Serialization.Json.DataContractJsonSerializer ser = new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(ClientSystemStatesNotification));
 
-			ClientSystemStatesNotification cssn = (ClientSystemStatesNotification)ser.ReadObject(s);
+            Stream s = new MemoryStream(ASCIIEncoding.Default.GetBytes(json));
 
-			practiceGameEnabled = cssn.practiceGameEnabled;
-			advancedTutorialEnabled = cssn.advancedTutorialEnabled;
-			minNumPlayersForPracticeGame = cssn.minNumPlayersForPracticeGame;
-			practiceGameTypeConfigIdList = cssn.practiceGameTypeConfigIdList;
-			freeToPlayChampionIdList = cssn.freeToPlayChampionIdList;
-			inactiveChampionIdList = cssn.inactiveChampionIdList;
-		}
+            ClientSystemStatesNotification cssn = (ClientSystemStatesNotification)ser.ReadObject(s);
 
-		public void WriteExternal(IDataOutput output)
-		{
-			throw new NotImplementedException();
-		}
-	}
+            practiceGameEnabled = cssn.practiceGameEnabled;
+            advancedTutorialEnabled = cssn.advancedTutorialEnabled;
+            minNumPlayersForPracticeGame = cssn.minNumPlayersForPracticeGame;
+            practiceGameTypeConfigIdList = cssn.practiceGameTypeConfigIdList;
+            freeToPlayChampionIdList = cssn.freeToPlayChampionIdList;
+            inactiveChampionIdList = cssn.inactiveChampionIdList;
+
+        }
+
+        public void WriteExternal(IDataOutput output)
+        {
+            throw new NotImplementedException();
+        }
+    }
+     */
+
+    public class ClientSystemStatesNotification : AbstractDomainObject
+    {
+        public ClientSystemStatesJson Json;
+    }
 }
