@@ -35,7 +35,7 @@
   <ItemGroup>
     <Reference Include="FluorineFx, Version=1.0.0.17, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\WESA\LOL Profiler\FluorineFXMods\Bin\net\4.0\FluorineFx.dll</HintPath>
+      <HintPath>..\..\daFluorineFx\Bin\net\4.0\FluorineFx.dll</HintPath>
     </Reference>
     <Reference Include="Nil, Version=0.1.4444.6511, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
